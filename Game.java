@@ -11,12 +11,19 @@ import java.nio.ByteOrder;
 
 import java.util.Random;
 import java.util.Date;
+import java.util.ArrayList;
 
 
 public class Game {
 
 	long fps, lastFPS;
 	long lastTime, newTime, deltaT;
+
+	public ArrayList<Updatable> toUpdate;
+
+	public Game() {
+		toUpdate = new ArrayList<>();
+	}
 
 	public static void main(String[] args) {
 		Game game = new Game();
@@ -37,7 +44,9 @@ public class Game {
 		fps++;
 	}
 
-	void update() {
+	void update(long t, long dt) {
+		for (int i = 0; i < toUpdate.size(); i++)
+			toUpdate.get(i).update(t, dt);
 	}
 
 	public void draw() {
@@ -88,7 +97,7 @@ public class Game {
 			lastTime = newTime;
 
 			//iterate
-			update();
+			update(newTime, deltaT);
 			draw();
 
 			Display.update();
