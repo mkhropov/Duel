@@ -20,9 +20,11 @@ public class Game {
 	long lastTime, newTime, deltaT;
 
 	public ArrayList<Updatable> toUpdate;
+	public ArrayList<Drawable> toDraw;
 
 	public Game() {
 		toUpdate = new ArrayList<>();
+		toDraw = new ArrayList<>();
 	}
 
 	public static void main(String[] args) {
@@ -52,6 +54,8 @@ public class Game {
 	public void draw() {
 		GL11.glClearColor(1.f, 1.f, 1.f, 1.f);
 		GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
+		for (int i = 0; i < toDraw.size(); i++)
+			toDraw.get(i).draw();
 	}
 
 	public void start() {
