@@ -13,7 +13,6 @@ import java.util.Random;
 import java.util.Date;
 import java.util.ArrayList;
 
-
 public class Game {
 
 	long fps, lastFPS;
@@ -25,6 +24,9 @@ public class Game {
 	public Game() {
 		toUpdate = new ArrayList<>();
 		toDraw = new ArrayList<>();
+		Sword sw = new Sword(400, 300);
+		toUpdate.add(sw);
+		toDraw.add(sw);
 	}
 
 	public static void main(String[] args) {
@@ -94,6 +96,8 @@ public class Game {
 		GL11.glOrtho(0, 800, 600, 0, 1, -1);
 		GL11.glMatrixMode(GL11.GL_MODELVIEW);
 		GL11.glLoadIdentity();
+		GL11.glEnable(GL11.GL_COLOR_MATERIAL);
+        GL11.glColor3d(0., 0., 0.);
 
 		while (!Display.isCloseRequested()) {
 			newTime = getTime();
