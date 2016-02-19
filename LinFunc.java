@@ -17,6 +17,6 @@ public class LinFunc {
 	}
 
 	public float get(long t) {
-		return bv + k*(t - beg);
+		return bv + ((ev - bv)*(t - beg))/(end - beg);
 	}
 }

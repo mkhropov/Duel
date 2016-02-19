@@ -26,20 +26,21 @@ public class Sword implements Updatable, Drawable {
 							-5,  250, };
 
 
-	public Sword(int x, int y, int dir, float alpha) {
+	public Sword(int x, int y, int dir, float alpha, long t) {
 		this.x = x;
 		this.y = y;
 		this.d = dir;
 		this.alpha = alpha;
-		this.lx = new LinFunc(0, (float)x, 100000, (float)x);
-		this.ly = new LinFunc(0, (float)y, 100000, (float)y);
-		this.la = new LinFunc(0, alpha, 20000, (float)(alpha + Math.PI));
+		this.lx = new LinFunc(t, (float)x, t+1000, (float)x);
+		this.ly = new LinFunc(t, (float)y, t+1000, (float)y);
+		this.la = new LinFunc(t, alpha, t+10000, (float)(alpha + Math.PI));
 	}
 
 	public void update(long t, long dt) {
 		x = Math.round(lx.get(t));
 		y = Math.round(ly.get(t));
 		alpha = la.get(t);
+		System.out.print(alpha + "  ");
 		c = (float)Math.cos(d*alpha);
 		s = (float)Math.sin(d*alpha);
 	}

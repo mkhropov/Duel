@@ -24,7 +24,7 @@ public class Game {
 	public Game() {
 		toUpdate = new ArrayList<>();
 		toDraw = new ArrayList<>();
-		Sword sw = new Sword(400, 300, 1, 1.5f);
+		Sword sw = new Sword(400, 300, 1, 1.5f, getTime());
 		toUpdate.add(sw);
 		toDraw.add(sw);
 	}
@@ -103,7 +103,7 @@ public class Game {
 			newTime = getTime();
 			deltaT = newTime - lastTime;
 			lastTime = newTime;
-
+//			System.out.print(deltaT+"  ");
 			//iterate
 			update(newTime, deltaT);
 			draw();
