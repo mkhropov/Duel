@@ -24,7 +24,7 @@ public class Game {
 	public Game() {
 		toUpdate = new ArrayList<>();
 		toDraw = new ArrayList<>();
-		Sword sw = new Sword(400, 300);
+		Sword sw = new Sword(400, 300, 1, 1.5f);
 		toUpdate.add(sw);
 		toDraw.add(sw);
 	}
@@ -110,7 +110,7 @@ public class Game {
 
 			Display.update();
 			updateFPS(deltaT);
-			Display.sync(60);
+//			Display.sync(60);
 		}
 
 		Display.destroy();

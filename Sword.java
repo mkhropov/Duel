@@ -1,37 +1,54 @@
 import org.lwjgl.opengl.GL11;
+import java.lang.Math;
 
 public class Sword implements Updatable, Drawable {
-	int x;
-	int y;
-//	float alpha;
+	int x, y;
+	LinFunc lx, ly;
+	int d;
+	public static final int DIR_LR = 1;
+	public static final int DIR_RL = -1;
+	float alpha;
+	LinFunc la;
+	float c, s;
+	public static final float ALPHA_0 = (float)(Math.PI / 4.);
+	static int[] model = {	 0,   0,
+							 8,   35,
+							-8,   35,
+							 7,  200,
+							-7,  200,
+							 16, 200,
+							-16, 200,
+							 16, 205,
+							-16, 205,
+							 5,  205,
+							-5,  205,
+							 5,  250,
+							-5,  250, };
 
-	public Sword(int x, int y) {
+
+	public Sword(int x, int y, int dir, float alpha) {
 		this.x = x;
 		this.y = y;
+		this.d = dir;
+		this.alpha = alpha;
+		this.lx = new LinFunc(0, (float)x, 100000, (float)x);
+		this.ly = new LinFunc(0, (float)y, 100000, (float)y);
+		this.la = new LinFunc(0, alpha, 20000, (float)(alpha + Math.PI));
 	}
 
 	public void update(long t, long dt) {
+		x = Math.round(lx.get(t));
+		y = Math.round(ly.get(t));
+		alpha = la.get(t);
+		c = (float)Math.cos(d*alpha);
+		s = (float)Math.sin(d*alpha);
 	}
 
 	public void draw() {
 		GL11.glBegin(GL11.GL_TRIANGLE_STRIP);
-        GL11.glVertex2d(x, y);
-        GL11.glVertex2d(x+8, y+35);
-        GL11.glVertex2d(x-8, y+35);
-        GL11.glVertex2d(x+7, y+200);
-        GL11.glVertex2d(x-7, y+200);
-        GL11.glEnd();
-		GL11.glBegin(GL11.GL_TRIANGLE_STRIP);
-		GL11.glVertex2d(x+16, y+200);
-		GL11.glVertex2d(x+16, y+205);
-		GL11.glVertex2d(x-16, y+200);
-		GL11.glVertex2d(x-16, y+205);
-		GL11.glEnd();
-		GL11.glBegin(GL11.GL_TRIANGLE_STRIP);
-		GL11.glVertex2d(x+5, y+200);
-		GL11.glVertex2d(x+5, y+250);
-		GL11.glVertex2d(x-5, y+200);
-		GL11.glVertex2d(x-5, y+250);
+		for (int i = 0; i < model.length; i+=2)
+			GL11.glVertex2d(x+model[i]*c-model[i+1]*s,
+							y+model[i+1]*c+model[i]*s);
 		GL11.glEnd();
 	}
 }
