@@ -48,7 +48,7 @@ public class Sword implements Updatable, Drawable {
 		this.alpha = -Math.PI/3;
 		this.lx = new LinFunc(0, 0.f, 1, 0.f);
 		this.ly = new LinFunc(0, 0.f, 1, 0.f);
-		this.la = new LinFunc(0, 0.f, 1, 0.f);
+		this.la = new LinFunc(0, 0.f, 1000, 1.f);
 	}
 
 	public void setAnimation(Animation an) {

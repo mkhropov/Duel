@@ -1,17 +1,16 @@
 import java.util.ArrayList;
 
-public class {
+public class Animation {
 	public static int curr_id = 0;
 	public int id;
 	public String description;
 	public int begX, begY;
 	public int endX, endY;
 	public long ends;
-	public ArrayList<Animation> next;
 
 	public LinFunc x, y, a;
 
-	long max(long, t1, long t2, long t3) {
+	private long max(long t1, long t2, long t3) {
 		if (t1 > t2)
 			if (t3 > t1)
 				return t3;
@@ -24,31 +23,38 @@ public class {
 				return t2;
 	}
 
-	public AnimationPhase(LinFunc x, LinFunc y, LinFunc a) {
-		this.begX = x.bv;
-		this.begY = y.bv;
-		this.endX = x.ev;
-		this.endY = y.ev;
+	public Animation(LinFunc x, LinFunc y, LinFunc a) {
+		this.x = x;
+		this.y = y;
+		this.a = a;
+		this.begX = (int) x.bv;
+		this.begY = (int) y.bv;
+		this.endX = (int) x.ev;
+		this.endY = (int) y.ev;
 		this.ends = max(x.end, y.end, a.end);
-		this.id = AnimationPhase.curr_id;
-		AnimationPhase.curr_id++;
+		this.id = curr_id++
 		next = new ArrayList<>();
 	}
 
-	public void addNextPhase(AnimationPhase ap) {
-		assert(ap.begX == this.endX);
-		assert(ap.begY == this.endY);
-		next.add(ap);
+	public void setDescription(String s) {
+		description = s;
 	}
 
-	public void set(long t) {
-		x.again(t);
-		y.again(t);
-		a.again(t);
+	public void set(long now) {
+		x.again(now);
+		y.again(now);
+		a.again(now);
 		ends = max(x.end, y.end, a.end);
 	}
 
-	public boolean done(long t) {
-		return (ends <= t);
+	public boolean done(long now) {
+		return (ends <= now);
+	}
+
+	public boolean matches(Animation next) {
+		return (
+			(this.endX == next.begX) &&
+			(this.endY == next.endY)
+		);
 	}
 }

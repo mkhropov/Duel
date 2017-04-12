@@ -25,6 +25,7 @@ public class Game {
 		toUpdate = new ArrayList<>();
 		toDraw = new ArrayList<>();
 		Sword sw = new Sword(400, 300, 1, 1.5f, getTime());
+//		sw.la = new LinFunc();
 		toUpdate.add(sw);
 		toDraw.add(sw);
 	}
