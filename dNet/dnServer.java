@@ -1,7 +1,7 @@
 package dNet;
 
-public class Server {
-	public Server() {
+public class dnServer {
+	public dnServer() {
 	}
 
 	public void open(int port) {
@@ -10,6 +10,6 @@ public class Server {
 	public void close() {
 	}
 
-	void serve(reqiest) {
+	void serve(request) {
 	}
 }
