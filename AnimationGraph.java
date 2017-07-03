@@ -5,13 +5,11 @@ public AnimationGraph {
 		static int curr_id = 0;
 		int id;
 		Animation an;
-		ArrayMap<int> nextId;
-		ArrayMap<String> nextKey;
-		public GraphNode(Animation an) {
+		ArrayMap<int>> next;
+		public Node(Animation an) {
 			this.an = an;
 			id = curr_id++;
-			nextId = new ArrayMap<int>();
-			nextKey = new ArrayMap<String>();
+			next = new ArrayMap<int>();
 		}
 	}
 
@@ -19,12 +17,6 @@ public AnimationGraph {
 
 	public AnimationGraph() {
 		nodes = new ArrayMap<Node>();
-	}
-
-	public int addAnimation(Animation an) {
-		Node n = new Node(an);
-		nodes.add(n);
-		return n.id;
 	}
 
 	private Node getNode(int id) {
@@ -37,6 +29,11 @@ public AnimationGraph {
 		return null;
 	}
 
+	public int addAnimation(Animation an) {
+		Node n = new Node(an);
+		nodes.add(n);
+		return n.id;
+	}
 
 	public Animation getAnimation(int id) {
 		return getNode(id).an;
@@ -44,11 +41,18 @@ public AnimationGraph {
 
 	public boolean setFollowup(int id, int key, int followupId) {
 		Node n = getNode(id);
+		assert (n != null);
 		Node fn = getNode(followupId);
+		assert (fn != null);
 		assert(n.an.matches(fn.an));
-		n.nextId.add(followupId);
-		n.nextKey.add(key);
-		assert(n.nextId.length == n.nextKey.length);
+		assert(n.next[key] == null);
+		n.next[key] = followupId;
+	}
+
+	public int getFollowup(int id, int key) {
+		Node n = getNode(id);
+		assert (n != null);
+		return n.next[key];
 	}
 }
 

@@ -1,9 +1,7 @@
 import java.util.ArrayList;
 
 public class Animation {
-	public static int curr_id = 0;
-	public int id;
-	public String description;
+	String description;
 	public int begX, begY;
 	public int endX, endY;
 	public long ends;
@@ -29,32 +27,38 @@ public class Animation {
 		this.a = a;
 		this.begX = (int) x.bv;
 		this.begY = (int) y.bv;
+		this.begA = (int) a.bv;
 		this.endX = (int) x.ev;
 		this.endY = (int) y.ev;
+		this.endA = (int) a.ev;
 		this.ends = max(x.end, y.end, a.end);
-		this.id = curr_id++
-		next = new ArrayList<>();
+		this.description = "Unnamed animation";
 	}
 
 	public void setDescription(String s) {
-		description = s;
+		this.description = s;
 	}
 
-	public void set(long now) {
-		x.again(now);
-		y.again(now);
-		a.again(now);
+	public String getDescription() {
+		return this.description;
+	}
+
+	public void set(long time) {
+		x.again(time);
+		y.again(time);
+		a.again(time);
 		ends = max(x.end, y.end, a.end);
 	}
 
-	public boolean done(long now) {
-		return (ends <= now);
+	public boolean done(long time) {
+		return (ends <= time);
 	}
 
 	public boolean matches(Animation next) {
 		return (
 			(this.endX == next.begX) &&
-			(this.endY == next.endY)
+			(this.endY == next.endY) &&
+			(this.endA == next.begA)
 		);
 	}
 }

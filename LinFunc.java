@@ -1,6 +1,6 @@
 public class LinFunc {
 
-	public long beg, end;
+	public long beg, end, len;
 	public float bv, ev;
 	float k;
 
@@ -9,19 +9,20 @@ public class LinFunc {
 		this.bv = bv;
 		this.end = end;
 		this.ev = ev;
-		this.k = (ev - bv) / (end - beg);
+		this.len = end - beg;
+		this.k = (ev - bv) / len;
 	}
 
-	public void again(long t) {
-		this.end = t + (end - beg);
-		this.beg = t;
+	public void again(long time) {
+		this.beg = time;
+		this.end = time + len;
 	}
 
-	public boolean done(long t) {
-		return (t > end);
+	public boolean done(long time) {
+		return (end <= time);
 	}
 
-	public float get(long t) {
-		return bv + ((ev - bv)*(t - beg))/(end - beg);
+	public float get(long time) {
+		return bv + ((ev - bv)*(t - beg)) / len;
 	}
 }
