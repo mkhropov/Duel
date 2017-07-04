@@ -1,10 +1,12 @@
-public class LinFunc {
+package dMath;
+
+public class dmLinFunc {
 
 	public long beg, end, len;
 	public float bv, ev;
 	float k;
 
-	public LinFunc(long beg, float bv, long end, float ev) {
+	public dmLinFunc(long beg, float bv, long end, float ev) {
 		this.beg = beg;
 		this.bv = bv;
 		this.end = end;
