@@ -1,12 +1,12 @@
-package main;
+package dGraph;
 
-public AnimationGraph {
+public dgAnimationGraph {
 	private Node {
 		static int curr_id = 0;
 		int id;
-		Animation an;
+		dgAnimation an;
 		ArrayMap<int>> next;
-		public Node(Animation an) {
+		public Node(dgAnimation an) {
 			this.an = an;
 			id = curr_id++;
 			next = new ArrayMap<int>();
@@ -15,7 +15,7 @@ public AnimationGraph {
 
 	private ArrayMap<Node> nodes;
 
-	public AnimationGraph() {
+	public dgAnimationGraph() {
 		nodes = new ArrayMap<Node>();
 	}
 
@@ -29,13 +29,13 @@ public AnimationGraph {
 		return null;
 	}
 
-	public int addAnimation(Animation an) {
+	public int addAnimation(dgAnimation an) {
 		Node n = new Node(an);
 		nodes.add(n);
 		return n.id;
 	}
 
-	public Animation getAnimation(int id) {
+	public dgAnimation getAnimation(int id) {
 		return getNode(id).an;
 	}
 
