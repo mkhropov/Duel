@@ -1,12 +1,12 @@
-package dMath;
+package dUtils;
 
-public class dmLinFunc {
+public class duLinFunc {
 
 	public long beg, end, len;
 	public float bv, ev;
 	float k;
 
-	public dmLinFunc(long beg, float bv, long end, float ev) {
+	public duLinFunc(long beg, float bv, long end, float ev) {
 		this.beg = beg;
 		this.bv = bv;
 		this.end = end;

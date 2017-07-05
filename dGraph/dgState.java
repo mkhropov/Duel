@@ -13,7 +13,7 @@ public class dgState {
 		this.iy = Math.floor((double) y);
 	}
 
-	public dgState(dmLinFunc x, dmLinFunc y, dmLinFunc a, beg = true) {
+	public dgState(duLinFunc x, duLinFunc y, duLinFunc a, beg = true) {
 		if (beg) {
 			this.x = x.bv;
 			this.y = y.bv;

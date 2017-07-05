@@ -1,14 +1,14 @@
 package dGraph;
 
 import java.util.ArrayList;
-import dMath.dmLinFunc;
+import dMath.duLinFunc;
 
 public class dgAnimation {
 	public int begX, begY;
 	public int endX, endY;
 	public long ends;
 
-	public dmLinFunc x, y, a;
+	public duLinFunc x, y, a;
 
 	private long max(long t1, long t2, long t3) {
 		if (t1 > t2)
@@ -23,7 +23,7 @@ public class dgAnimation {
 				return t2;
 	}
 
-	public dgAnimation(dmLinFunc x, dmLinFunc y, dmLinFunc a) {
+	public dgAnimation(duLinFunc x, duLinFunc y, duLinFunc a) {
 		this.x = x;
 		this.y = y;
 		this.a = a;
