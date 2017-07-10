@@ -65,4 +65,25 @@ public class duJSONManager {
 		}
 		return arr;
 	}
+
+	private <T> T saveSingle(File f, T obj) {
+		if (f.isFile() && f.getName().matches(".*\\.json")) {
+			//System.out.println("Saving "+f.getName());
+			BufferedWriter bw = new BufferedWriter(new FileWriter(f));
+			try {
+				bw.write(gson.toJson(obj, T);
+			} catch (java.io.IOException e) {
+				System.out.println("ERROR: Error while writing "+f.getName());
+			} finally {
+			   try {
+				   bw.close();
+				} catch (java.io.IOException e) {
+					System.out.println("ERROR: Error closing file "+f.getName());
+					return null;
+				}
+			}
+		}
+	}
+
+
 }
