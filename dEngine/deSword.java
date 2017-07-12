@@ -1,8 +1,8 @@
-package main;
+package dEngine;
 
 import dGraph.*;
 
-public class Sword extends dgSword {
+public class deSword extends dgSword {
 	public int pos;
 	public int ids[10];
 	public static final int POS0 = 0; /* at ready */
@@ -19,7 +19,7 @@ public class Sword extends dgSword {
 
 	public AnimationGraph ag;
 
-	public Sword() {
+	public deSword() {
 		super();
 		this.ag = new AnimationGraph();
 		Animation an;
