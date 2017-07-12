@@ -15,8 +15,32 @@ public abstract class dgObject implements dgDrawable, dgUpdatable {
 
 	public dgObject(int flip = 1, int glType = GL11.GL_TRIANGLE_STRIP) {
 		this.flip = flip;
-		this.draw = false;
+//		this.draw = false;
+		this.draw = true;
 		this.glType = type;
+	}
+
+	public void setXY(int x, int y) {
+		this.x = x;
+		this.y = y;
+	}
+
+	public void addXY(int dx, int dy) {
+		this.x += dx;
+		this.y += dy;
+	}
+
+	public void setA(float a) {
+		this.a = a;
+		this.ca = (float)Math.cos(d*a);
+		this.sa = (float)Math.sin(d*a);
+
+	}
+
+	public void addA(float da) {
+		this.a += da;
+		this.ca = (float)Math.cos(d*a);
+		this.sa = (float)Math.sin(d*a);
 	}
 
 	public void setAnimation(dgAnimation an) {
@@ -37,8 +61,8 @@ public abstract class dgObject implements dgDrawable, dgUpdatable {
 		this.x = Math.round(an.x.get(t));
 		this.y = Math.round(an.y.get(t));
 		this.a = an.a.get(t);
-		this.ca = (float)Math.cos(d*alpha);
-		this.sa = (float)Math.sin(d*alpha);
+		this.ca = (float)Math.cos(d*a);
+		this.sa = (float)Math.sin(d*a);
 	}
 
 	/* unconditional */
