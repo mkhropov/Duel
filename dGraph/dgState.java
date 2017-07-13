@@ -1,11 +1,14 @@
 package dGraph;
 
+import dUtils.duLinFunc;
+
 public class dgState {
 	public float x, y, a;
 	public int ix, iy;
 	public static final float AERR = 1e-6f;
 
-	public dgState(float x, float y, float a) {
+	public dgState(float x, float y, float a)
+	{
 		this.x = x;
 		this.y = y;
 		this.a = a;
@@ -13,7 +16,9 @@ public class dgState {
 		this.iy = Math.floor((double) y);
 	}
 
-	public dgState(duLinFunc x, duLinFunc y, duLinFunc a, beg = true) {
+	public dgState(duLinFunc x, duLinFunc y, duLinFunc a,
+		boolean beg)
+	{
 		if (beg) {
 			this.x = x.bv;
 			this.y = y.bv;
@@ -23,11 +28,17 @@ public class dgState {
 			this.y = y.ev;
 			this.a = a.ev;
 		}
-		this.ix = Math.floor((double) x);
-		this.iy = Math.floor((double) y);
+		this.ix = Math.floor((double) this.x);
+		this.iy = Math.floor((double) this.y);
 	}
 
-	public dgState(dgAnimation an, beg = true) {
+	public dgState(duLinFunc x, duLinFunc y, duLinFunc a)
+	{
+		return new dgState(x, y, a, true);
+	}
+
+	public dgState(dgAnimation an, boolean beg)
+	{
 		if (beg) {
 			this.x = an.x.bv;
 			this.y = an.y.bv;
@@ -41,7 +52,13 @@ public class dgState {
 		this.iy = Math.floor((double) y);
 	}
 
-	public boolean equals(dgState s) {
+	public dgState(dgAnimation an)
+	{
+		return new dgState(an, true);
+	}
+
+	public boolean equals(dgState s)
+	{
 		return (
 			(this.ix == s.ix) &&
 			(this.iy == s.iy) &&
@@ -49,7 +66,8 @@ public class dgState {
 		);
 	}
 
-	public isBeg(dgAnimation a) {
+	public isBeg(dgAnimation a)
+	{
 		return (
 			(this.ix == Math.floor(a.x.bv)) &&
 			(this.iy == Math.floor(a.y.bv)) &&
@@ -57,7 +75,8 @@ public class dgState {
 		);
 	}
 
-	public isEnd(dgAnimation a) {
+	public isEnd(dgAnimation a)
+	{
 		return (
 			(this.ix == Math.floor(a.x.ev)) &&
 			(this.iy == Math.floor(a.y.ev)) &&

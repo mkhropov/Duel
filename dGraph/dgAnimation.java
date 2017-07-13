@@ -6,6 +6,7 @@ import dMath.duLinFunc;
 public class dgAnimation {
 	public int begX, begY;
 	public int endX, endY;
+	public float begA, endA;
 	public long ends;
 
 	public duLinFunc x, y, a;
@@ -27,12 +28,12 @@ public class dgAnimation {
 		this.x = x;
 		this.y = y;
 		this.a = a;
-		this.begX = (int) x.bv;
-		this.begY = (int) y.bv;
-		this.begA = (int) a.bv;
-		this.endX = (int) x.ev;
-		this.endY = (int) y.ev;
-		this.endA = (int) a.ev;
+		this.begX = Math.round(x.bv);
+		this.begY = Math.round(y.bv);
+		this.begA = a.bv;
+		this.endX = Math.round(x.ev);
+		this.endY = Math.round(y.ev);
+		this.endA = a.ev;
 		this.ends = max(x.end, y.end, a.end);
 	}
 
@@ -40,12 +41,12 @@ public class dgAnimation {
 		this.x = new LinFunc(s1.x, s2.x, 0, t);
 		this.y = new LinFunc(s1.y, s2.y, 0, t);
 		this.a = new LinFunc(s1.a, s2.a, 0, t);
-		this.begX = (int) x.bv;
-		this.begY = (int) y.bv;
-		this.begA = (int) a.bv;
-		this.endX = (int) x.ev;
-		this.endY = (int) y.ev;
-		this.endA = (int) a.ev;
+		this.begX = Math.round(x.bv);
+		this.begY = Math.round(y.bv);
+		this.begA = a.bv;
+		this.endX = Math.round(x.ev);
+		this.endY = Math.round(y.ev);
+		this.endA = a.ev;
 		this.ends = max(x.end, y.end, a.end);
 	}
 

@@ -8,76 +8,95 @@ public abstract class dgObject implements dgDrawable, dgUpdatable {
 	private float a;
 	private dgAnimation an;
 	float ca, sa;
+	boolean draw;
 	int flip;
+	int glType;
 
-	int[][2] model;
+	int[][] model;
 
 
-	public dgObject(int flip = 1, int glType = GL11.GL_TRIANGLE_STRIP) {
+	public dgObject(int flip, int glType)
+	{
 		this.flip = flip;
 //		this.draw = false;
 		this.draw = true;
-		this.glType = type;
+		this.glType = glType;
 	}
 
-	public void setXY(int x, int y) {
+	public dgObject(int flip)
+	{
+		return new dgObject(flip, GL11.GL_TRIANGLE_STRIP);
+	}
+
+	public dgObject()
+	{
+		return new dgObject(1);
+	}
+
+	public void setXY(int x, int y)
+	{
 		this.x = x;
 		this.y = y;
 	}
 
-	public void addXY(int dx, int dy) {
+	public void addXY(int dx, int dy)
+	{
 		this.x += dx;
 		this.y += dy;
 	}
 
-	public void setA(float a) {
+	public void setA(float a)
+	{
 		this.a = a;
-		this.ca = (float)Math.cos(d*a);
-		this.sa = (float)Math.sin(d*a);
+		this.ca = Math.cos(flip * a);
+		this.sa = Math.sin(flip * a);
 
 	}
 
-	public void addA(float da) {
+	public void addA(float da)
+	{
 		this.a += da;
-		this.ca = (float)Math.cos(d*a);
-		this.sa = (float)Math.sin(d*a);
+		this.ca = Math.cos(flip * a);
+		this.sa = Math.sin(flip * a);
 	}
 
-	public void setAnimation(dgAnimation an) {
+	public void setAnimation(dgAnimation an)
+	{
 		this.draw = true;
 		this.an = an;
 	}
 
-	public void resetAnimation() {
+	public void resetAnimation()
+	{
 		this.draw = false;
 	}
 
-	public void update(long t, long dt) {
+	public void update(long t, long dt)
+	{
 		if (this.an.done(t))
 			return;
-
-		this.an.set(t);
 
 		this.x = Math.round(an.x.get(t));
 		this.y = Math.round(an.y.get(t));
 		this.a = an.a.get(t);
-		this.ca = (float)Math.cos(d*a);
-		this.sa = (float)Math.sin(d*a);
+		this.ca = Math.cos(flip * a);
+		this.sa = Math.sin(flip * a);
 	}
 
 	/* unconditional */
-	public void draw_() {
+	public void draw_()
+	{
 		GL11.glBegin(glType);
 		for (int i = 0; i < model.length; i++)
-			GL11.glVertex2d(x + model[i][0]*c - model[i][1]*s,
-							y + model[i][1]*c + model[i][0]*s);
+			GL11.glVertex2d(x + model[i][0]*ca - model[i][1]*sa,
+							y + model[i][1]*ca + model[i][0]*sa);
 		GL11.glEnd();
 	}
 
-	public void draw() {
-		if (this.draw) {
+	public void draw()
+	{
+		if (this.draw)
 			draw_();
-		}
 	}
 
 }

@@ -1,5 +1,6 @@
 package dEngine;
 
+import org.lwjgl.opengl.GL11;
 import dGraph.*;
 
 public class deSword extends dgSword {
@@ -19,8 +20,8 @@ public class deSword extends dgSword {
 
 	public AnimationGraph ag;
 
-	public deSword() {
-		super();
+	public deSword(int flip = 1, int glType = GL11.GL_TRIANGLE_STRIP) {
+		super(flip, glType);
 		this.ag = new AnimationGraph();
 		Animation an;
 		an = new Animation(); an.setDescription("Pierce bk");
