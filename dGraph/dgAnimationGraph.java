@@ -1,36 +1,26 @@
 package dGraph;
 
-public dgAnimationGraph {
-	private Node {
-		static int curr_id = 0;
-		int id;
-		dgAnimation an;
-		ArrayMap<int>> next;
-		public Node(dgAnimation an) {
-			this.an = an;
-			id = curr_id++;
-			next = new ArrayMap<int>();
-		}
-	}
+import java.util.ArrayList;
 
-	private ArrayMap<Node> nodes;
+public class dgAnimationGraph {
+	private ArrayList<dgNode> nodes;
 
 	public dgAnimationGraph() {
-		nodes = new ArrayMap<Node>();
+		nodes = new ArrayList<>();
 	}
 
-	private Node getNode(int id) {
-		if (id > Node.curr_id)
+	private dgNode getNode(int id) {
+		if (id > dgNode.curr_id)
 			return null;
-		for (Node n : nodes)
+		for (dgNode n : nodes)
 			if (n.id == id)
 				return n;
-		sys.out.println("Incorrect animation id");
+		System.out.println("Incorrect animation id");
 		return null;
 	}
 
 	public int addAnimation(dgAnimation an) {
-		Node n = new Node(an);
+		dgNode n = new dgNode(an);
 		nodes.add(n);
 		return n.id;
 	}
@@ -40,19 +30,19 @@ public dgAnimationGraph {
 	}
 
 	public boolean setFollowup(int id, int key, int followupId) {
-		Node n = getNode(id);
+		dgNode n = getNode(id);
 		assert (n != null);
-		Node fn = getNode(followupId);
+		dgNode fn = getNode(followupId);
 		assert (fn != null);
-		assert(n.an.matches(fn.an));
-		assert(n.next[key] == null);
-		n.next[key] = followupId;
+		assert(n.an.canChain(fn.an));
+		assert(n.next.get(key) == null);
+		n.next.set(key, followupId);
 	}
 
 	public int getFollowup(int id, int key) {
-		Node n = getNode(id);
+		dgNode n = getNode(id);
 		assert (n != null);
-		return n.next[key];
+		return n.next.get(key);
 	}
 }
 

@@ -1,7 +1,7 @@
 package dGraph;
 
 import java.util.ArrayList;
-import dMath.duLinFunc;
+import dUtils.duLinFunc;
 
 public class dgAnimation {
 	public int begX, begY;
@@ -38,9 +38,9 @@ public class dgAnimation {
 	}
 
 	public dgAnimation(dgState s1, dgState s2, long t) {
-		this.x = new LinFunc(s1.x, s2.x, 0, t);
-		this.y = new LinFunc(s1.y, s2.y, 0, t);
-		this.a = new LinFunc(s1.a, s2.a, 0, t);
+		this.x = new duLinFunc(0, s1.x, t, s2.x);
+		this.y = new duLinFunc(0, s1.y, t, s2.y);
+		this.a = new duLinFunc(0, s1.a, t, s2.a);
 		this.begX = Math.round(x.bv);
 		this.begY = Math.round(y.bv);
 		this.begA = a.bv;

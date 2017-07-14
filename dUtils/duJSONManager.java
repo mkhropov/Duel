@@ -57,9 +57,9 @@ public class duJSONManager {
 		return <T>loadSingle(f);
 	}
 
-	public <T> ArrayMap<T> load(String FolderName) {
+	public <T> ArrayList<T> load(String FolderName) {
 		File jsonFolder = new File(FolderName);
-		ArrayMap<T> arr = new ArrayMap<>();
+		ArrayList<T> arr = new ArrayList<>();
 		for (File f: jsonFolder.listFiles()){
 			arr.add(<T>loadSingle(f));
 		}

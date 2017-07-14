@@ -25,6 +25,6 @@ public class duLinFunc {
 	}
 
 	public float get(long time) {
-		return bv + ((ev - bv)*(t - beg)) / len;
+		return bv + ((ev - bv) * (time - beg)) / len;
 	}
 }

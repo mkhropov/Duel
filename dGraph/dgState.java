@@ -12,8 +12,8 @@ public class dgState {
 		this.x = x;
 		this.y = y;
 		this.a = a;
-		this.ix = Math.floor((double) x);
-		this.iy = Math.floor((double) y);
+		this.ix = (int) x;
+		this.iy = (int) y;
 	}
 
 	public dgState(duLinFunc x, duLinFunc y, duLinFunc a,
@@ -28,13 +28,13 @@ public class dgState {
 			this.y = y.ev;
 			this.a = a.ev;
 		}
-		this.ix = Math.floor((double) this.x);
-		this.iy = Math.floor((double) this.y);
+		this.ix = (int) this.x;
+		this.iy = (int) this.y;
 	}
 
 	public dgState(duLinFunc x, duLinFunc y, duLinFunc a)
 	{
-		return new dgState(x, y, a, true);
+		this(x, y, a, true);
 	}
 
 	public dgState(dgAnimation an, boolean beg)
@@ -48,13 +48,13 @@ public class dgState {
 			this.y = an.y.ev;
 			this.a = an.a.ev;
 		}
-		this.ix = Math.floor((double) x);
-		this.iy = Math.floor((double) y);
+		this.ix = (int) x;
+		this.iy = (int) y;
 	}
 
 	public dgState(dgAnimation an)
 	{
-		return new dgState(an, true);
+		this(an, true);
 	}
 
 	public boolean equals(dgState s)
@@ -66,7 +66,7 @@ public class dgState {
 		);
 	}
 
-	public isBeg(dgAnimation a)
+	public boolean isBeg(dgAnimation a)
 	{
 		return (
 			(this.ix == Math.floor(a.x.bv)) &&
@@ -75,7 +75,7 @@ public class dgState {
 		);
 	}
 
-	public isEnd(dgAnimation a)
+	public boolean isEnd(dgAnimation a)
 	{
 		return (
 			(this.ix == Math.floor(a.x.ev)) &&
