@@ -34,9 +34,13 @@ public class dgAnimationGraph {
 		assert (n != null);
 		dgNode fn = getNode(followupId);
 		assert (fn != null);
-		assert(n.an.canChain(fn.an));
-		assert(n.next.get(key) == null);
-		n.next.set(key, followupId);
+//		assert(n.next.get(key) == null);
+		if (n.an.canChain(fn.an)) {
+			n.next.set(key, followupId);
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	public int getFollowup(int id, int key) {

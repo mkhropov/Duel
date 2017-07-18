@@ -2,13 +2,13 @@ package dGraph;
 
 import java.util.ArrayList;
 
-private class dgNode {
-	static int curr_id = 0;
-	int id;
+class dgNode {
+	static Integer curr_id = new Integer(0);
+	Integer id;
 	dgAnimation an;
-	ArrayList<int> next;
+	ArrayList<Integer> next;
 
-	public Node(dgAnimation an) {
+	public dgNode(dgAnimation an) {
 		this.an = an;
 		this.id = curr_id++;
 		this.next = new ArrayList<>();

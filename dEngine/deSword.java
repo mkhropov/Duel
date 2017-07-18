@@ -20,38 +20,55 @@ public class deSword extends dgSword {
 
 	public dgAnimationGraph ag;
 
-	public deSword(int flip = 1, int glType = GL11.GL_TRIANGLE_STRIP) {
-		super(flip, glType);
+	/* engine constructor part */
+	private void _deSword() {
 		this.ag = new dgAnimationGraph();
+		/*
 		dgAnimation an;
-		an = new dgAnimation(); an.setDescription("Pierce bk");
+		an = new dgAnimation();
 		id[0] = ag.addAnimation(an);
-		an = new dgAnimation(); an.setDescription("Pierce fw");
+		an = new dgAnimation();
 		id[1] = ag.addAnimation(an);
 		ag.setFollowup(id[0], 0, id[1]);
-		an = new dgAnimation(); an.setDescription("Pierce rtr");
+		an = new dgAnimation();
 		id[2] = ag.addAnimation(an);
 		ag.setFollowup(id[1], 0, id[2]);
 		ag.setFollowup(id[2], 0, id[0]);
 
-		an = new dgAnimation(); an.setDescription("Swing bk");
+		an = new dgAnimation();
 		id[3] = ag.addAnimation(an);
 		ag.setFollowup(id[2], 1, id[3]);
-		an = new dgAnimation(); an.setDescription("Swing fw hi");
+		an = new dgAnimation();
 		id[4] = ag.addAnimation(an);
 		ag.setFollowup(id[3], 0, id[4]);
-		an = new dgAnimation(); an.setDescription("Swing fw lo");
+		an = new dgAnimation();
 		id[5] = ag.addAnimation(an);
 		ag.setFollowup(id[3], 1, id[5]);
-		an = new dgAnimation(); an.setDescription("Swing rtr hi");
+		an = new dgAnimation();
 		id[6] = ag.addAnimation(an);
 		ag.setFollowup(id[4], 0, id[6]);
-		an = new dgAnimation(); an.setDescription("Swing rtr lo");
+		an = new dgAnimation();
 		id[7] = ag.addAnimation(an);
 		ag.setFollowup(id[5], 0, id[7]);
-
+		*/
 	}
 
+	public deSword(int flip, int glType) {
+		super(flip, glType);
+		_deSword();
+	}
+
+	public deSword(int flip) {
+		super(flip);
+		_deSword();
+	}
+
+	public deSword() {
+		super();
+		_deSword();
+	}
+
+/*
 	public void draw() {
 		super.draw();
 	}
@@ -59,4 +76,5 @@ public class deSword extends dgSword {
 	public void update(long t, long dt) {
 		super.update(t, dt);
 	}
+*/
 }

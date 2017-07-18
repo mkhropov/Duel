@@ -1,5 +1,3 @@
-package main;
-
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
@@ -30,10 +28,12 @@ public class Snap {
 	public ArrayList<dgUpdatable> toUpdate;
 	public ArrayList<dgDrawable> toDraw;
 
+	deSword sw;
+
 	public Snap() {
 		toUpdate = new ArrayList<>();
 		toDraw = new ArrayList<>();
-		deSword sw = new deSword(400, 300, 1, 1.5f, getTime());
+		sw = new deSword();
 //		sw.la = new LinFunc();
 		toUpdate.add(sw);
 		toDraw.add(sw);
@@ -67,6 +67,7 @@ public class Snap {
 			if (Mouse.getEventButton() == 0) { /* left button */
 				if (Mouse.getEventButtonState()) { /* pressed */
 					/* move model */
+					System.out.println("Click at ("+x+","+y+")");
 					sw.setXY(x, y);
 				}
 			}
@@ -74,22 +75,22 @@ public class Snap {
 
 /* Keyboard continuous press poll */
 		if (Keyboard.isKeyDown(Keyboard.KEY_W)) {
-			sw.addXY(0, Math.ceil(100 * dt / 1000.));
+			sw.addXY(0, 1 + (int)(100 * dt / 1000.));
 		}
 		if (Keyboard.isKeyDown(Keyboard.KEY_A)) {
-			sw.addXY(-Math.ceil(100 * dt / 1000.), 0);
+			sw.addXY(-1 - (int)(100 * dt / 1000.), 0);
 		}
 		if (Keyboard.isKeyDown(Keyboard.KEY_S)) {
-			sw.addXY(0, -Math.ceil(100 * dt / 1000.));
+			sw.addXY(0, -1 - (int)(100 * dt / 1000.));
 		}
 		if (Keyboard.isKeyDown(Keyboard.KEY_D)) {
-			sw.addXY(Math.ceil(100 * dt / 1000.), 0);
+			sw.addXY(1 + (int)(100 * dt / 1000.), 0);
 		}
 		if (Keyboard.isKeyDown(Keyboard.KEY_Q)) {
-			sw.addA(0.25 * dt / 1000.);
+			sw.addA((float)(0.25 * dt / 1000.));
 		}
 		if (Keyboard.isKeyDown(Keyboard.KEY_E)) {
-			sw.addA(-0.25 * dt / 1000.);
+			sw.addA((float)(-0.25 * dt / 1000.));
 		}
 
 /* Keyboard event poll */
@@ -176,6 +177,7 @@ public class Snap {
 			lastTime = newTime;
 //			System.out.print(deltaT+"  ");
 			//iterate
+			input(newTime, deltaT);
 			update(newTime, deltaT);
 			draw();
 
