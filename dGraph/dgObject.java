@@ -37,6 +37,7 @@ public abstract class dgObject implements dgDrawable, dgUpdatable {
 	{
 		this.x = x;
 		this.y = y;
+		System.out.println("dgObject.setXY("+x+","+y+")");
 	}
 
 	public void addXY(int dx, int dy)
@@ -86,6 +87,7 @@ public abstract class dgObject implements dgDrawable, dgUpdatable {
 	/* unconditional */
 	public void draw_()
 	{
+//		System.out.println("dgObject.draw_()");
 		GL11.glBegin(glType);
 		for (int i = 0; i < model.length; i++)
 			GL11.glVertex2d(x + model[i][0]*ca - model[i][1]*sa,

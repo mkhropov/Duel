@@ -22,6 +22,11 @@ import dEngine.deSword;
 
 public class Snap {
 
+	private int screenW, screenH;
+
+	private boolean mousePressed;
+	private int mouseX, mouseY;
+
 	long fps, lastFPS;
 	long lastTime, newTime, deltaT;
 
@@ -31,10 +36,16 @@ public class Snap {
 	deSword sw;
 
 	public Snap() {
+		screenW = 800;
+		screenH = 600;
+		mousePressed = false;
+
 		toUpdate = new ArrayList<>();
 		toDraw = new ArrayList<>();
 		sw = new deSword();
 //		sw.la = new LinFunc();
+		sw.setAnimation(null);
+		sw.setA(0.f);
 		toUpdate.add(sw);
 		toDraw.add(sw);
 	}
@@ -63,34 +74,48 @@ public class Snap {
 		int y = Mouse.getEventY();
 
 /* Mouse event poll */
+/* for setting approximal angle */
+		boolean mouseMoved = (Math.abs(mouseX-x)+Math.abs(mouseY-y) > 10.);
+		if (mousePressed && mouseMoved) {
+			sw.setA((float)Math.atan2(mouseX-x, mouseY-y));
+		}
+/* for setting approximal position */
 		while (Mouse.next()) {
 			if (Mouse.getEventButton() == 0) { /* left button */
 				if (Mouse.getEventButtonState()) { /* pressed */
-					/* move model */
-					System.out.println("Click at ("+x+","+y+")");
-					sw.setXY(x, y);
+					mousePressed = true;
+					mouseX = x;
+					mouseY = y;
+				} else {
+					mousePressed = false;
+					if (!mouseMoved) {
+						/* move model */
+						System.out.println("Click at ("+x+","+y+")");
+						sw.setXY(x, screenH-y);
+					}
 				}
 			}
 		}
 
 /* Keyboard continuous press poll */
+/* for precise movements */
 		if (Keyboard.isKeyDown(Keyboard.KEY_W)) {
-			sw.addXY(0, 1 + (int)(100 * dt / 1000.));
+			sw.addXY(0, -1 - (int)(50 * dt / 1000.));
 		}
 		if (Keyboard.isKeyDown(Keyboard.KEY_A)) {
-			sw.addXY(-1 - (int)(100 * dt / 1000.), 0);
+			sw.addXY(-1 - (int)(50 * dt / 1000.), 0);
 		}
 		if (Keyboard.isKeyDown(Keyboard.KEY_S)) {
-			sw.addXY(0, -1 - (int)(100 * dt / 1000.));
+			sw.addXY(0, 1 + (int)(50 * dt / 1000.));
 		}
 		if (Keyboard.isKeyDown(Keyboard.KEY_D)) {
-			sw.addXY(1 + (int)(100 * dt / 1000.), 0);
+			sw.addXY(1 + (int)(50 * dt / 1000.), 0);
 		}
 		if (Keyboard.isKeyDown(Keyboard.KEY_Q)) {
-			sw.addA((float)(0.25 * dt / 1000.));
+			sw.addA((float)(0.15 * dt / 1000.));
 		}
 		if (Keyboard.isKeyDown(Keyboard.KEY_E)) {
-			sw.addA((float)(-0.25 * dt / 1000.));
+			sw.addA((float)(-0.15 * dt / 1000.));
 		}
 
 /* Keyboard event poll */
@@ -128,13 +153,14 @@ public class Snap {
 	public void draw() {
 		GL11.glClearColor(1.f, 1.f, 1.f, 1.f);
 		GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
+//		sw.draw();
 		for (int i = 0; i < toDraw.size(); i++)
 			toDraw.get(i).draw();
 	}
 
 	public void start() {
 		try {
-			Display.setDisplayMode(new DisplayMode(800,600));
+			Display.setDisplayMode(new DisplayMode(screenW, screenH));
 			Display.create();
 		} catch (LWJGLException e) {
 			e.printStackTrace();

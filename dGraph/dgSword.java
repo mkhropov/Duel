@@ -18,6 +18,9 @@ public class dgSword extends dgObject {
 			 { -5,  205},
 			 {  5,  250},
 			 { -5,  250},};
+		System.out.println("new dgSword:");
+		for (int i = 0; i < model.length; i++)
+			System.out.println(model[i][0]+", "+model[i][1]);
 	}
 
 	public dgSword(int flip, int glType) {
